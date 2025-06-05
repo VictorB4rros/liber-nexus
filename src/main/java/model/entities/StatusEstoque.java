@@ -1,13 +1,20 @@
 package model.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class StatusEstoque {
+public class StatusEstoque implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Integer idStatusEstoque;
 	private String descricao;
 	
 	public StatusEstoque() {
+	}
+	
+	public StatusEstoque(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public StatusEstoque(Integer idStatusEstoque, String descricao) {

@@ -1,23 +1,29 @@
 package model.entities;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class Estoque {
+public class Estoque implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private Integer quantidade;
-	
 	private Biblioteca biblioteca;
 	private Livro livro;
 	private StatusEstoque status;
+	
+	private final List<Emprestimo> listaDeEmprestimos = new ArrayList<>();
 	
 	public Estoque() {
 	}
 
 	public Estoque(Integer quantidade, Biblioteca biblioteca, Livro livro, StatusEstoque status) {
-		this.quantidade = quantidade;
-		this.biblioteca = biblioteca;
-		this.livro = livro;
-		this.status = status;
+		this.quantidade = Objects.requireNonNull(quantidade, "quantidade não pode ser nula");
+		this.biblioteca = Objects.requireNonNull(biblioteca, "biblioteca não pode ser nula");
+		this.livro = Objects.requireNonNull(livro, "livro não pode ser nulo");
+		this.status = Objects.requireNonNull(status, "status não pode ser nulo");
 	}
 
 	public Integer getQuantidade() {
@@ -50,6 +56,10 @@ public class Estoque {
 
 	public void setStatus(StatusEstoque status) {
 		this.status = status;
+	}
+
+	public List<Emprestimo> getListaDeEmprestimos() {
+		return listaDeEmprestimos;
 	}
 
 	@Override

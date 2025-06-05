@@ -1,25 +1,29 @@
 package model.entities;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class Setor {
+public class Setor implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Integer idSetor;
 	private String descricao;
 	
-	private Biblioteca biblioteca;
-	private Telefone telefone;
-	private Email email;
+	private final List<BibliotecaSetor> listaDeBibliotecas = new ArrayList<>();
 	
 	public Setor() {
 	}
 	
-	public Setor(Integer idSetor, String descricao, Biblioteca biblioteca, Telefone telefone, Email email) {
+	public Setor(String descricao) {
+		this.descricao = Objects.requireNonNull(descricao, "Decrição do setor não pode ser nula");
+	}
+	
+	public Setor(Integer idSetor, String descricao) {
 		this.idSetor = idSetor;
 		this.descricao = descricao;
-		this.biblioteca = biblioteca;
-		this.telefone = telefone;
-		this.email = email;
 	}
 
 	public Integer getIdSetor() {
@@ -38,33 +42,13 @@ public class Setor {
 		this.descricao = descricao;
 	}
 
-	public Biblioteca getBiblioteca() {
-		return biblioteca;
-	}
-
-	public void setBiblioteca(Biblioteca biblioteca) {
-		this.biblioteca = biblioteca;
-	}
-
-	public Telefone getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(Telefone telefone) {
-		this.telefone = telefone;
-	}
-
-	public Email getEmail() {
-		return email;
-	}
-
-	public void setEmail(Email email) {
-		this.email = email;
+	public List<BibliotecaSetor> getListaDeBibliotecas() {
+		return listaDeBibliotecas;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(biblioteca, idSetor);
+		return Objects.hash(idSetor);
 	}
 
 	@Override
@@ -76,12 +60,16 @@ public class Setor {
 		if (getClass() != obj.getClass())
 			return false;
 		Setor other = (Setor) obj;
-		return Objects.equals(biblioteca, other.biblioteca) && Objects.equals(idSetor, other.idSetor);
+		return Objects.equals(idSetor, other.idSetor);
 	}
 
 	@Override
 	public String toString() {
-		return "Setor [idSetor=" + idSetor + ", descricao=" + descricao + ", biblioteca=" + biblioteca + ", telefone="
-				+ telefone + ", email=" + email + "]";
+		return "Setor [idSetor=" + idSetor + ", descricao=" + descricao + ", listaDeBibliotecas=" + listaDeBibliotecas
+				+ "]";
+	}
+	
+	public void addBiblioteca(BibliotecaSetor bibliotecaSetor) {
+		listaDeBibliotecas.add(bibliotecaSetor);
 	}
 }

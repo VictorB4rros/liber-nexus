@@ -1,9 +1,12 @@
 package model.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Email {
+public class Email implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private String email;
 
 	public Email() {
@@ -40,6 +43,6 @@ public class Email {
 
 	@Override
 	public String toString() {
-		return "Email [email=" + email + "]";
+		return email;
 	}
 }

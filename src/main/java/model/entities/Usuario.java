@@ -1,27 +1,30 @@
 package model.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Usuario {
+public abstract class Usuario implements Serializable {
 
-	private Integer idUsuario;
-	private String cpfUsuario;
-	private String nomeUsuario;
-	private String emailUsuario;
+	private static final long serialVersionUID = 1L;
 	
-	List<Acesso> listaDeAcessos = new ArrayList<>();
-	List<Emprestimo> listaDeEmprestimos = new ArrayList<>();
+	private Integer idUsuario;
+	private String senha;
+	
+	private final List<UsuarioAcesso> listaDeAcessos = new ArrayList<>();
+	private final List<Emprestimo> listaDeEmprestimos = new ArrayList<>();
 	
 	public Usuario() {
 	}
+	
+	public Usuario(String senha) {
+		this.senha = Objects.requireNonNull(senha, "Senha não pode ser nula");
+	}
 
-	public Usuario(Integer idUsuario, String cpfUsuario, String nomeUsuario, String emailUsuario) {
-		this.idUsuario = idUsuario;
-		this.cpfUsuario = cpfUsuario;
-		this.nomeUsuario = nomeUsuario;
-		this.emailUsuario = emailUsuario;
+	public Usuario(Integer idUsuario, String senha) {
+		this.idUsuario = Objects.requireNonNull(idUsuario, "Id do usuário não pode ser nulo");
+		this.senha = Objects.requireNonNull(senha, "Senha não pode ser nula");
 	}
 
 	public Integer getIdUsuario() {
@@ -32,31 +35,15 @@ public class Usuario {
 		this.idUsuario = idUsuario;
 	}
 
-	public String getCpfUsuario() {
-		return cpfUsuario;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setCpfUsuario(String cpfUsuario) {
-		this.cpfUsuario = cpfUsuario;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
-	public String getNomeUsuario() {
-		return nomeUsuario;
-	}
-
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
-	}
-
-	public String getEmailUsuario() {
-		return emailUsuario;
-	}
-
-	public void setEmailUsuario(String emailUsuario) {
-		this.emailUsuario = emailUsuario;
-	}
-
-	public List<Acesso> getListaDeAcessos() {
+	public List<UsuarioAcesso> getListaDeAcessos() {
 		return listaDeAcessos;
 	}
 
@@ -66,7 +53,7 @@ public class Usuario {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(cpfUsuario, idUsuario);
+		return Objects.hash(idUsuario);
 	}
 
 	@Override
@@ -78,20 +65,16 @@ public class Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		return Objects.equals(cpfUsuario, other.cpfUsuario) && Objects.equals(idUsuario, other.idUsuario);
-	}
-
-	@Override
-	public String toString() {
-		return "Usuario [idUsuario=" + idUsuario + ", cpfUsuario=" + cpfUsuario + ", nomeUsuario=" + nomeUsuario
-				+ ", emailUsuario=" + emailUsuario + "]";
+		return Objects.equals(idUsuario, other.idUsuario);
 	}
 	
-	public void addAcesso(Acesso acesso) {
-		if (!listaDeAcessos.contains(acesso)) {
-			listaDeAcessos.add(acesso);
-			acesso.getListaDeUsuarios().add(this);
-		}
+	@Override
+	public String toString() {
+		return "Usuario [idUsuario=" + idUsuario + "]";
+	}
+
+	public void addAcesso(UsuarioAcesso usuarioAcesso) {
+		listaDeAcessos.add(usuarioAcesso);
 	}
 	
 	public void addEmprestimo(Emprestimo emprestimo) {

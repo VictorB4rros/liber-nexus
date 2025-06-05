@@ -1,9 +1,12 @@
 package model.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Telefone {
+public class Telefone implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private String ddd;
 	private String telefone;
 	
@@ -50,6 +53,6 @@ public class Telefone {
 
 	@Override
 	public String toString() {
-		return "Telefone [ddd=" + ddd + ", telefone=" + telefone + "]";
+		return ddd + " " + telefone;
 	}
 }

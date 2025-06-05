@@ -1,17 +1,24 @@
 package model.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Acesso {
+public class Acesso implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Integer codAcesso;
 	private String tipoAcesso;
 	
-	List<Usuario> listaDeUsuarios = new ArrayList<>();
+	private final List<UsuarioAcesso> listaDeUsuarios = new ArrayList<>();
 	
 	public Acesso() {
+	}
+
+	public Acesso(String tipoAcesso) {
+		this.tipoAcesso = Objects.requireNonNull(tipoAcesso, "o tipo de acesso não pode ser nulo");
 	}
 
 	public Acesso(Integer codAcesso, String tipoAcesso) {
@@ -35,7 +42,7 @@ public class Acesso {
 		this.tipoAcesso = tipoAcesso;
 	}
 
-	public List<Usuario> getListaDeUsuarios() {
+	public List<UsuarioAcesso> getListaDeUsuarios() {
 		return listaDeUsuarios;
 	}
 
@@ -61,10 +68,11 @@ public class Acesso {
 		return "Acesso [codAcesso=" + codAcesso + ", tipoAcesso=" + tipoAcesso + "]";
 	}
 	
-	public void addUsuario(Usuario usuario) {
-		if (!listaDeUsuarios.contains(usuario)) {
-			listaDeUsuarios.add(usuario);
-			usuario.getListaDeAcessos().add(this);
-		}
+	public void addUsuarioAcesso(UsuarioAcesso usuarioAcesso) {
+		listaDeUsuarios.add(usuarioAcesso);
+	}
+	
+	public void removeUsuarioAcesso(UsuarioAcesso usuarioAcesso) {
+		listaDeUsuarios.remove(usuarioAcesso);
 	}
 }

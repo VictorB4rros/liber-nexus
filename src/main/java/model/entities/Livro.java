@@ -1,12 +1,15 @@
 package model.entities;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Livro {
+public class Livro implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Integer idLivro;
 	private String tituloLivro;
 	private String autorLivro;
@@ -14,10 +17,19 @@ public class Livro {
 	private String genero;
 	private String idioma;
 	
-	private List<Estoque> bibliotecasComEsseLivro = new ArrayList<>();
-	private List<Emprestimo> listaDeEmprestimos = new ArrayList<>();
+	private final List<Estoque> bibliotecasComEsseLivro = new ArrayList<>();
+	private final List<Emprestimo> listaDeEmprestimos = new ArrayList<>();
 	
 	public Livro() {
+	}
+	
+	public Livro(String tituloLivro, String autorLivro, Date dataPublicacao, String genero,
+			String idioma) {
+		this.tituloLivro = Objects.requireNonNull(tituloLivro, "O título do livro não pode ser nulo");
+		this.autorLivro = Objects.requireNonNull(autorLivro, "O nome do autor não pode ser nulo");
+		this.dataPublicacao = dataPublicacao;
+		this.genero = genero;
+		this.idioma = idioma;
 	}
 
 	public Livro(Integer idLivro, String tituloLivro, String autorLivro, Date dataPublicacao, String genero,

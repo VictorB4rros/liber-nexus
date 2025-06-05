@@ -9,19 +9,31 @@ import java.util.Objects;
 public class Biblioteca implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Integer idBiblioteca;
 	private String cnpjBiblioteca;
 	private String nomeBiblioteca;
 	private Time horaAbertura;
 	private Time horaFechamento;
-	
+
 	private EnderecoBiblioteca endereco;
-	private List<Setor> listaSetores = new ArrayList<>();
-	private List<Estoque> livrosEmEstoque = new ArrayList<>();
-	private List<Emprestimo> listaDeEmprestimos = new ArrayList<>();
-	
+	private final List<BibliotecaSetor> listaDeSetores = new ArrayList<>();
+	private final List<Estoque> livrosEmEstoque = new ArrayList<>();
+
 	public Biblioteca() {
+	}
+
+	public Biblioteca(String cnpjBiblioteca, String nomeBiblioteca, Time horaAbertura, Time horaFechamento,
+			EnderecoBiblioteca endereco) {
+		this.cnpjBiblioteca = Objects.requireNonNull(cnpjBiblioteca, "CNPJ da biblioteca não pode ser nulo");
+		this.nomeBiblioteca = Objects.requireNonNull(nomeBiblioteca, "Nome da biblioteca não pode ser nulo");
+		this.horaAbertura = Objects.requireNonNull(horaAbertura, "Hora de abertura não pode ser nula");
+		this.horaFechamento = Objects.requireNonNull(horaFechamento, "Hora de fechamento não pode ser nula");
+		this.endereco = Objects.requireNonNull(endereco, "Endereço da biblioteca não pode ser nulo");
+
+		if (horaAbertura.after(horaFechamento)) {
+			throw new IllegalArgumentException("Hora de abertura não pode ser após a hora de fechamento");
+		}
 	}
 
 	public Biblioteca(Integer idBiblioteca, String cnpjBiblioteca, String nomeBiblioteca, Time horaAbertura,
@@ -63,6 +75,10 @@ public class Biblioteca implements Serializable {
 	}
 
 	public void setHoraAbertura(Time horaAbertura) {
+		Objects.requireNonNull(horaAbertura, "Hora de abertura não pode ser nula");
+		if (this.horaFechamento != null && horaAbertura.after(this.horaFechamento)) {
+			throw new IllegalArgumentException("Hora de abertura não pode ser após a hora de fechamento");
+		}
 		this.horaAbertura = horaAbertura;
 	}
 
@@ -71,6 +87,10 @@ public class Biblioteca implements Serializable {
 	}
 
 	public void setHoraFechamento(Time horaFechamento) {
+		Objects.requireNonNull(horaFechamento, "Hora de fechamento não pode ser nula");
+		if (this.horaAbertura != null && this.horaAbertura.after(horaFechamento)) {
+			throw new IllegalArgumentException("Hora de fechamento não pode ser antes da hora de abertura");
+		}
 		this.horaFechamento = horaFechamento;
 	}
 
@@ -79,19 +99,15 @@ public class Biblioteca implements Serializable {
 	}
 
 	public void setEndereco(EnderecoBiblioteca endereco) {
-		this.endereco = endereco;
+		this.endereco = Objects.requireNonNull(endereco, "Endereço da biblioteca não pode ser nulo");
 	}
 
-	public List<Setor> getListaSetores() {
-		return listaSetores;
+	public List<BibliotecaSetor> getListaDeSetores() {
+		return listaDeSetores;
 	}
 
 	public List<Estoque> getLivrosEmEstoque() {
 		return livrosEmEstoque;
-	}
-
-	public List<Emprestimo> getListaDeEmprestimos() {
-		return listaDeEmprestimos;
 	}
 
 	@Override
@@ -113,19 +129,29 @@ public class Biblioteca implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Biblioteca [idBiblioteca=" + idBiblioteca + ", cnpjBiblioteca=" + cnpjBiblioteca + ", nomeBiblioteca="
-				+ nomeBiblioteca + "]";
+	    return "Biblioteca [id = " + idBiblioteca +
+	            ", CNPJ = " + cnpjBiblioteca +
+	            ", Nome = " + nomeBiblioteca +
+	            ", Abertura = " + horaAbertura +
+	            ", Fechamento = " + horaFechamento +
+	            ", Endereço = " + endereco + 
+	            ", Setores = " + listaDeSetores.size() + 
+	            ", Livros em estoque = " + livrosEmEstoque.size() + "]";
+	}
+
+	public void addBibliotecaSetor(BibliotecaSetor bibliotecaSetor) {
+		listaDeSetores.add(bibliotecaSetor);
 	}
 	
-	public void addSetor(Setor setor) {
-		listaSetores.add(setor);
+	public void removeBibliotecaSetor(BibliotecaSetor bibliotecaSetor) {
+		listaDeSetores.remove(bibliotecaSetor);
 	}
-	
+
 	public void addEstoque(Estoque estoque) {
 		livrosEmEstoque.add(estoque);
 	}
 	
-	public void addEmprestimo(Emprestimo emprestimo) {
-		listaDeEmprestimos.add(emprestimo);
+	public void removeEstoque(Estoque estoque) {
+		livrosEmEstoque.remove(estoque);
 	}
 }
