@@ -7,6 +7,7 @@ public class EnderecoBiblioteca implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	private Integer idBiblioteca;
 	private String estado;
 	private String cidade;
 	private String cep;
@@ -19,14 +20,22 @@ public class EnderecoBiblioteca implements Serializable {
 	public EnderecoBiblioteca() {
 	}
 
-	public EnderecoBiblioteca(String estado, String cidade, String cep, String bairro, String rua, Integer numero, Biblioteca biblioteca) {
+	public EnderecoBiblioteca(Integer idBiblioteca, String estado, String cidade, String cep, String bairro, String rua, Integer numero, Biblioteca biblioteca) {
+		this.idBiblioteca = Objects.requireNonNull(idBiblioteca, "Id da biblioteca não pode ser nulo");
 		this.estado = Objects.requireNonNull(estado, "estado não pode ser nulo");
 		this.cidade = Objects.requireNonNull(cidade, "cidade não pode ser nula");
 		this.cep = Objects.requireNonNull(cep, "cep não pode ser nulo");
 		this.bairro = Objects.requireNonNull(bairro, "bairro não pode ser nulo");
 		this.rua = Objects.requireNonNull(rua, "rua não pode ser nula");
 		this.numero = Objects.requireNonNull(numero, "numero não pode ser nulo");
-		this.biblioteca = Objects.requireNonNull(biblioteca, "biblioteca não pode ser nula");
+	}
+
+	public Integer getIdBiblioteca() {
+		return idBiblioteca;
+	}
+
+	public void setIdBiblioteca(Integer idBiblioteca) {
+		this.idBiblioteca = idBiblioteca;
 	}
 
 	public String getEstado() {

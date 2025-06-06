@@ -9,21 +9,40 @@ public class Estoque implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private Integer idBiblioteca;
+	private Integer idLivro;
 	private Integer quantidade;
+	private Integer idStatus;
+	
 	private Biblioteca biblioteca;
 	private Livro livro;
 	private StatusEstoque status;
-	
 	private final List<Emprestimo> listaDeEmprestimos = new ArrayList<>();
 	
 	public Estoque() {
 	}
 
-	public Estoque(Integer quantidade, Biblioteca biblioteca, Livro livro, StatusEstoque status) {
-		this.quantidade = Objects.requireNonNull(quantidade, "quantidade não pode ser nula");
-		this.biblioteca = Objects.requireNonNull(biblioteca, "biblioteca não pode ser nula");
-		this.livro = Objects.requireNonNull(livro, "livro não pode ser nulo");
-		this.status = Objects.requireNonNull(status, "status não pode ser nulo");
+	public Estoque(Integer idBiblioteca, Integer idLivro, Integer quantidade, Integer idStatus) {
+		this.idBiblioteca = Objects.requireNonNull(idBiblioteca, "Id da biblioteca não pode ser nulo");
+		this.idLivro = Objects.requireNonNull(idLivro, "Id do livro não pode ser nulo");
+		this.quantidade = quantidade;
+		this.idStatus = idStatus;
+	}
+
+	public Integer getIdBiblioteca() {
+		return idBiblioteca;
+	}
+
+	public void setIdBiblioteca(Integer idBiblioteca) {
+		this.idBiblioteca = idBiblioteca;
+	}
+
+	public Integer getIdLivro() {
+		return idLivro;
+	}
+
+	public void setIdLivro(Integer idLivro) {
+		this.idLivro = idLivro;
 	}
 
 	public Integer getQuantidade() {
@@ -32,6 +51,14 @@ public class Estoque implements Serializable {
 
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
+	}
+
+	public Integer getIdStatus() {
+		return idStatus;
+	}
+
+	public void setIdStatus(Integer idStatus) {
+		this.idStatus = idStatus;
 	}
 
 	public Biblioteca getBiblioteca() {
@@ -64,7 +91,7 @@ public class Estoque implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(biblioteca, livro);
+		return Objects.hash(idBiblioteca, idLivro, idStatus, quantidade);
 	}
 
 	@Override
@@ -76,12 +103,21 @@ public class Estoque implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Estoque other = (Estoque) obj;
-		return Objects.equals(biblioteca, other.biblioteca) && Objects.equals(livro, other.livro);
+		return Objects.equals(idBiblioteca, other.idBiblioteca) && Objects.equals(idLivro, other.idLivro)
+				&& Objects.equals(idStatus, other.idStatus) && Objects.equals(quantidade, other.quantidade);
 	}
 
 	@Override
 	public String toString() {
-		return "Estoque [quantidade=" + quantidade + ", biblioteca=" + biblioteca + ", livro=" + livro + ", status="
-				+ status + "]";
+		return "Estoque [idBiblioteca=" + idBiblioteca + ", idLivro=" + idLivro + ", quantidade=" + quantidade
+				+ ", idStatus=" + idStatus + "]";
+	}
+	
+	public void addEmprestimo(Emprestimo emprestimo) {
+		listaDeEmprestimos.add(emprestimo);
+	}
+	
+	public void removeEmprestimo(Emprestimo emprestimo) {
+		listaDeEmprestimos.remove(emprestimo);
 	}
 }

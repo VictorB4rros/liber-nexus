@@ -18,7 +18,6 @@ public class Livro implements Serializable {
 	private String idioma;
 	
 	private final List<Estoque> bibliotecasComEsseLivro = new ArrayList<>();
-	private final List<Emprestimo> listaDeEmprestimos = new ArrayList<>();
 	
 	public Livro() {
 	}
@@ -94,10 +93,6 @@ public class Livro implements Serializable {
 		return bibliotecasComEsseLivro;
 	}
 
-	public List<Emprestimo> getListaDeEmprestimos() {
-		return listaDeEmprestimos;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(idLivro);
@@ -114,18 +109,18 @@ public class Livro implements Serializable {
 		Livro other = (Livro) obj;
 		return Objects.equals(idLivro, other.idLivro);
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Livro [idLivro=" + idLivro + ", tituloLivro=" + tituloLivro + ", autorLivro=" + autorLivro
 				+ ", dataPublicacao=" + dataPublicacao + ", genero=" + genero + ", idioma=" + idioma + "]";
 	}
-	
+
 	public void addEstoque(Estoque estoque) {
 		bibliotecasComEsseLivro.add(estoque);
 	}
 	
-	public void addEmprestimo(Emprestimo emprestimo) {
-		listaDeEmprestimos.add(emprestimo);
+	public void removeEstoque(Estoque estoque) {
+		bibliotecasComEsseLivro.remove(estoque);
 	}
 }

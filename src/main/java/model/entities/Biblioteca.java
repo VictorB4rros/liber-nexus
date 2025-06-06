@@ -23,13 +23,11 @@ public class Biblioteca implements Serializable {
 	public Biblioteca() {
 	}
 
-	public Biblioteca(String cnpjBiblioteca, String nomeBiblioteca, Time horaAbertura, Time horaFechamento,
-			EnderecoBiblioteca endereco) {
+	public Biblioteca(String cnpjBiblioteca, String nomeBiblioteca, Time horaAbertura, Time horaFechamento) {
 		this.cnpjBiblioteca = Objects.requireNonNull(cnpjBiblioteca, "CNPJ da biblioteca não pode ser nulo");
 		this.nomeBiblioteca = Objects.requireNonNull(nomeBiblioteca, "Nome da biblioteca não pode ser nulo");
 		this.horaAbertura = Objects.requireNonNull(horaAbertura, "Hora de abertura não pode ser nula");
 		this.horaFechamento = Objects.requireNonNull(horaFechamento, "Hora de fechamento não pode ser nula");
-		this.endereco = Objects.requireNonNull(endereco, "Endereço da biblioteca não pode ser nulo");
 
 		if (horaAbertura.after(horaFechamento)) {
 			throw new IllegalArgumentException("Hora de abertura não pode ser após a hora de fechamento");
@@ -37,13 +35,12 @@ public class Biblioteca implements Serializable {
 	}
 
 	public Biblioteca(Integer idBiblioteca, String cnpjBiblioteca, String nomeBiblioteca, Time horaAbertura,
-			Time horaFechamento, EnderecoBiblioteca endereco) {
+			Time horaFechamento) {
 		this.idBiblioteca = idBiblioteca;
 		this.cnpjBiblioteca = cnpjBiblioteca;
 		this.nomeBiblioteca = nomeBiblioteca;
 		this.horaAbertura = horaAbertura;
 		this.horaFechamento = horaFechamento;
-		this.endereco = endereco;
 	}
 
 	public Integer getIdBiblioteca() {

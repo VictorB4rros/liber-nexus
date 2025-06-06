@@ -9,23 +9,37 @@ public class Emprestimo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer idEmprestimo;
-	private Usuario usuario;
-	private Biblioteca biblioteca;
-	private Estoque estoque;
+	private Integer idUsuario;
+	private Integer idBiblioteca;
+	private Integer idLivro;
 	private Date dataReserva;
 	private Date dataColeta;
 	private Date dataPrevDevolucao;
 	private Date dataDevolucao;
 
+	private Usuario usuario;
+	private Estoque estoque;
+
 	public Emprestimo() {
 	}
 
-	public Emprestimo(Integer idEmprestimo, Usuario usuario, Biblioteca biblioteca, Estoque estoque,
-			Date dataReserva, Date dataColeta, Date dataPrevDevolucao, Date dataDevolucao) {
-		this.idEmprestimo = Objects.requireNonNull(idEmprestimo, "ID do empréstimo não pode ser nulo");
-		this.usuario = Objects.requireNonNull(usuario, "Usuário não pode ser nulo");
-		this.biblioteca = Objects.requireNonNull(biblioteca, "Biblioteca não pode ser nula");
-		this.estoque = Objects.requireNonNull(estoque, "Estoque não pode ser nulo");
+	public Emprestimo(Integer idUsuario, Integer idBiblioteca, Integer idLivro, Date dataReserva, Date dataColeta,
+			Date dataPrevDevolucao, Date dataDevolucao) {
+		this.idUsuario = Objects.requireNonNull(idUsuario, "Id do usuário não pode ser nulo");
+		this.idBiblioteca = Objects.requireNonNull(idBiblioteca, "Id da biblioteca não pode ser nulo");
+		this.idLivro = Objects.requireNonNull(idLivro, "Id do livro não pode ser nulo");
+		this.dataReserva = dataReserva;
+		this.dataColeta = dataColeta;
+		this.dataPrevDevolucao = dataPrevDevolucao;
+		this.dataDevolucao = dataDevolucao;
+	}
+
+	public Emprestimo(Integer idEmprestimo, Integer idUsuario, Integer idBiblioteca, Integer idLivro, Date dataReserva,
+			Date dataColeta, Date dataPrevDevolucao, Date dataDevolucao) {
+		this.idEmprestimo = idEmprestimo;
+		this.idUsuario = idUsuario;
+		this.idBiblioteca = idBiblioteca;
+		this.idLivro = idLivro;
 		this.dataReserva = dataReserva;
 		this.dataColeta = dataColeta;
 		this.dataPrevDevolucao = dataPrevDevolucao;
@@ -40,28 +54,28 @@ public class Emprestimo implements Serializable {
 		this.idEmprestimo = idEmprestimo;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public Integer getIdUsuario() {
+		return idUsuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
-	public Biblioteca getBiblioteca() {
-		return biblioteca;
+	public Integer getIdBiblioteca() {
+		return idBiblioteca;
 	}
 
-	public void setBiblioteca(Biblioteca biblioteca) {
-		this.biblioteca = biblioteca;
+	public void setIdBiblioteca(Integer idBiblioteca) {
+		this.idBiblioteca = idBiblioteca;
 	}
 
-	public Estoque getEstoque() {
-		return estoque;
+	public Integer getIdLivro() {
+		return idLivro;
 	}
 
-	public void setEstoque(Estoque estoque) {
-		this.estoque = estoque;
+	public void setIdLivro(Integer idLivro) {
+		this.idLivro = idLivro;
 	}
 
 	public Date getDataReserva() {
@@ -96,9 +110,25 @@ public class Emprestimo implements Serializable {
 		this.dataDevolucao = dataDevolucao;
 	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Estoque getEstoque() {
+		return estoque;
+	}
+
+	public void setEstoque(Estoque estoque) {
+		this.estoque = estoque;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(biblioteca, estoque, idEmprestimo, usuario);
+		return Objects.hash(idEmprestimo);
 	}
 
 	@Override
@@ -110,14 +140,6 @@ public class Emprestimo implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Emprestimo other = (Emprestimo) obj;
-		return Objects.equals(biblioteca, other.biblioteca) && Objects.equals(estoque, other.estoque)
-				&& Objects.equals(idEmprestimo, other.idEmprestimo) && Objects.equals(usuario, other.usuario);
-	}
-
-	@Override
-	public String toString() {
-		return "Emprestimo [idEmprestimo=" + idEmprestimo + ", usuario=" + usuario + ", biblioteca=" + biblioteca.getNomeBiblioteca()
-				+ ", estoque=" + estoque + ", dataReserva=" + dataReserva + ", dataColeta=" + dataColeta
-				+ ", dataPrevDevolucao=" + dataPrevDevolucao + ", dataDevolucao=" + dataDevolucao + "]";
+		return Objects.equals(idEmprestimo, other.idEmprestimo);
 	}
 }

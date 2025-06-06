@@ -7,6 +7,9 @@ public class BibliotecaSetor implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	private Integer idBiblioteca;
+	private Integer idSetor;
+	
 	private Biblioteca biblioteca;
 	private Setor setor;
 	private Telefone telefone;
@@ -15,11 +18,25 @@ public class BibliotecaSetor implements Serializable {
 	public BibliotecaSetor() {
 	}
 
-	public BibliotecaSetor(Biblioteca biblioteca, Setor setor, Telefone telefone, Email email) {
-		this.biblioteca = Objects.requireNonNull(biblioteca, "Biblioteca não pode ser nula");
-		this.setor = Objects.requireNonNull(setor, "Setor não pode ser nulo");
-		this.telefone = telefone;
-		this.email = email;
+	public BibliotecaSetor(Integer idBiblioteca, Integer idSetor) {
+		this.idBiblioteca = Objects.requireNonNull(idBiblioteca, "Id da biblioteca não pode ser nulo");
+		this.idSetor = Objects.requireNonNull(idSetor, "Id do setor não pode ser nulo");
+	}
+
+	public Integer getIdBiblioteca() {
+		return idBiblioteca;
+	}
+
+	public void setIdBiblioteca(Integer idBiblioteca) {
+		this.idBiblioteca = idBiblioteca;
+	}
+
+	public Integer getIdSetor() {
+		return idSetor;
+	}
+
+	public void setIdSetor(Integer idSetor) {
+		this.idSetor = idSetor;
 	}
 
 	public Biblioteca getBiblioteca() {
@@ -56,7 +73,7 @@ public class BibliotecaSetor implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(biblioteca, email, setor, telefone);
+		return Objects.hash(idBiblioteca, idSetor);
 	}
 
 	@Override
@@ -68,13 +85,6 @@ public class BibliotecaSetor implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		BibliotecaSetor other = (BibliotecaSetor) obj;
-		return Objects.equals(biblioteca, other.biblioteca) && Objects.equals(email, other.email)
-				&& Objects.equals(setor, other.setor) && Objects.equals(telefone, other.telefone);
-	}
-
-	@Override
-	public String toString() {
-		return "BibliotecaSetor [biblioteca=" + biblioteca.getNomeBiblioteca() + ", setor=" + setor.getDescricao() + ", telefone=" + telefone + ", email="
-				+ email + "]";
+		return Objects.equals(idBiblioteca, other.idBiblioteca) && Objects.equals(idSetor, other.idSetor);
 	}
 }

@@ -72,4 +72,8 @@ public class Setor implements Serializable {
 	public void addBiblioteca(BibliotecaSetor bibliotecaSetor) {
 		listaDeBibliotecas.add(bibliotecaSetor);
 	}
+	
+	public void removeBiblioteca(BibliotecaSetor bibliotecaSetor) {
+		listaDeBibliotecas.remove(bibliotecaSetor);
+	}
 }

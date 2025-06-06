@@ -23,8 +23,8 @@ public abstract class Usuario implements Serializable {
 	}
 
 	public Usuario(Integer idUsuario, String senha) {
-		this.idUsuario = Objects.requireNonNull(idUsuario, "Id do usuário não pode ser nulo");
-		this.senha = Objects.requireNonNull(senha, "Senha não pode ser nula");
+		this.idUsuario = idUsuario;
+		this.senha = senha;
 	}
 
 	public Integer getIdUsuario() {
