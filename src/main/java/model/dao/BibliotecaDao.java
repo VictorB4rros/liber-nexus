@@ -2,13 +2,13 @@ package model.dao;
 
 import java.util.List;
 
-import model.entities.Biblioteca;
+import model.dto.BibliotecaDTO;
 
 public interface BibliotecaDao {
 
-	void insert(Biblioteca obj);
-	void update(Biblioteca obj);
+	void insert(BibliotecaDTO obj);
+	void update(BibliotecaDTO obj);
 	void deleteById(Integer id);
-	Biblioteca findById(Integer id);
-	List<Biblioteca> findAll();
+	BibliotecaDTO findById(Integer id);
+	List<BibliotecaDTO> findAll();
 }
