@@ -8,7 +8,6 @@ public class Funcionario extends Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer idFuncionario;
-	private String cpf;
 	private Integer idBiblioteca;
 	private Integer idSetor;
 	private String nomeFuncionario;
@@ -17,21 +16,10 @@ public class Funcionario extends Usuario implements Serializable {
 	public Funcionario() {
 	}
 
-	public Funcionario(String senha, String cpf, Integer idBiblioteca,
-			Integer idSetor, String nomeFuncionario, String emailFuncionario) {
-		super(senha);
-		this.cpf = Objects.requireNonNull(cpf, "CPF não pode ser nulo");
-		this.idBiblioteca = Objects.requireNonNull(idBiblioteca, "Id da biblioteca não pode ser nulo");
-		this.idSetor = Objects.requireNonNull(idSetor, "Id do setor não pode ser nulo");
-		this.nomeFuncionario = Objects.requireNonNull(nomeFuncionario, "Nome do funcionário não pode ser nulo");
-		this.emailFuncionario = Objects.requireNonNull(emailFuncionario, "Email do funcionário não pode ser nulo");
-	}
-
 	public Funcionario(Integer idUsuario, String senha, Integer idFuncionario, String cpf, Integer idBiblioteca,
 			Integer idSetor, String nomeFuncionario, String emailFuncionario) {
-		super(idUsuario, senha);
+		super(idUsuario, cpf, senha);
 		this.idFuncionario = idFuncionario;
-		this.cpf = cpf;
 		this.idBiblioteca = idBiblioteca;
 		this.idSetor = idSetor;
 		this.nomeFuncionario = nomeFuncionario;
@@ -44,14 +32,6 @@ public class Funcionario extends Usuario implements Serializable {
 
 	public void setIdFuncionario(Integer idFuncionario) {
 		this.idFuncionario = idFuncionario;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
 	}
 
 	public Integer getIdBiblioteca() {
@@ -90,7 +70,7 @@ public class Funcionario extends Usuario implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(cpf, emailFuncionario, idFuncionario);
+		result = prime * result + Objects.hash(super.getCpfUsuario(), emailFuncionario, idFuncionario);
 		return result;
 	}
 
@@ -103,14 +83,7 @@ public class Funcionario extends Usuario implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Funcionario other = (Funcionario) obj;
-		return Objects.equals(cpf, other.cpf) && Objects.equals(emailFuncionario, other.emailFuncionario)
+		return Objects.equals(super.getCpfUsuario(), other.getCpfUsuario()) && Objects.equals(emailFuncionario, other.emailFuncionario)
 				&& Objects.equals(idFuncionario, other.idFuncionario);
-	}
-
-	@Override
-	public String toString() {
-		return "Funcionario [idFuncionario=" + idFuncionario + ", cpf=" + cpf + ", idBiblioteca=" + idBiblioteca
-				+ ", idSetor=" + idSetor + ", nomeFuncionario=" + nomeFuncionario + ", emailFuncionario="
-				+ emailFuncionario + "]";
 	}
 }

@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class Usuario implements Serializable {
+public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	private Integer idUsuario;
+	private String cpfUsuario;
 	private String senha;
 	
 	private final List<UsuarioAcesso> listaDeAcessos = new ArrayList<>();
@@ -22,8 +23,9 @@ public abstract class Usuario implements Serializable {
 		this.senha = Objects.requireNonNull(senha, "Senha não pode ser nula");
 	}
 
-	public Usuario(Integer idUsuario, String senha) {
+	public Usuario(Integer idUsuario, String cpfUsuario, String senha) {
 		this.idUsuario = idUsuario;
+		this.cpfUsuario = cpfUsuario;
 		this.senha = senha;
 	}
 
@@ -43,6 +45,14 @@ public abstract class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
+	public String getCpfUsuario() {
+		return cpfUsuario;
+	}
+
+	public void setCpfUsuario(String cpfUsuario) {
+		this.cpfUsuario = cpfUsuario;
+	}
+
 	public List<UsuarioAcesso> getListaDeAcessos() {
 		return listaDeAcessos;
 	}
@@ -50,10 +60,10 @@ public abstract class Usuario implements Serializable {
 	public List<Emprestimo> getListaDeEmprestimos() {
 		return listaDeEmprestimos;
 	}
-
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(idUsuario);
+		return Objects.hash(cpfUsuario, idUsuario);
 	}
 
 	@Override
@@ -65,12 +75,7 @@ public abstract class Usuario implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		return Objects.equals(idUsuario, other.idUsuario);
-	}
-	
-	@Override
-	public String toString() {
-		return "Usuario [idUsuario=" + idUsuario + "]";
+		return Objects.equals(cpfUsuario, other.cpfUsuario) && Objects.equals(idUsuario, other.idUsuario);
 	}
 
 	public void addAcesso(UsuarioAcesso usuarioAcesso) {
