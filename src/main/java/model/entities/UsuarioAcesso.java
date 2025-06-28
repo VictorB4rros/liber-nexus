@@ -7,36 +7,36 @@ public class UsuarioAcesso implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Usuario usuario;
-	private Acesso acesso;
+	private Integer idUsuario;
+	private Integer codAcesso;
 	
 	public UsuarioAcesso() {
 	}
 
-	public UsuarioAcesso(Usuario usuario, Acesso acesso) {
-		this.usuario = usuario;
-		this.acesso = acesso;
+	public UsuarioAcesso(Integer idUsuario, Integer codAcesso) {
+		this.idUsuario = idUsuario;
+		this.codAcesso = codAcesso;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public Integer getIdUsuario() {
+		return idUsuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
-	public Acesso getAcesso() {
-		return acesso;
+	public Integer getCodAcesso() {
+		return codAcesso;
 	}
 
-	public void setAcesso(Acesso acesso) {
-		this.acesso = acesso;
+	public void setCodAcesso(Integer codAcesso) {
+		this.codAcesso = codAcesso;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(acesso, usuario);
+		return Objects.hash(codAcesso, idUsuario);
 	}
 
 	@Override
@@ -48,11 +48,6 @@ public class UsuarioAcesso implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		UsuarioAcesso other = (UsuarioAcesso) obj;
-		return Objects.equals(acesso, other.acesso) && Objects.equals(usuario, other.usuario);
-	}
-
-	@Override
-	public String toString() {
-		return "UsuarioAcesso [usuario=" + usuario + ", acesso=" + acesso + "]";
+		return Objects.equals(codAcesso, other.codAcesso) && Objects.equals(idUsuario, other.idUsuario);
 	}
 }

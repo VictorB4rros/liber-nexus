@@ -4,12 +4,15 @@ import java.sql.Connection;
 
 import model.dao.impl.BibliotecaDaoJDBC;
 import model.dao.impl.EmailDaoJDBC;
+import model.dao.impl.EmprestimoDaoJDBC;
 import model.dao.impl.EnderecoBibliotecaDaoJDBC;
 import model.dao.impl.EstoqueDaoJDBC;
 import model.dao.impl.FuncionarioDaoJDBC;
+import model.dao.impl.LeitorDaoJDBC;
 import model.dao.impl.LivroDaoJDBC;
 import model.dao.impl.SetorDaoJDBC;
 import model.dao.impl.TelefoneDaoJDBC;
+import model.dao.impl.UsuarioAcessoDaoJDBC;
 
 public class DaoFactory {
 
@@ -43,5 +46,17 @@ public class DaoFactory {
     
     public static FuncionarioDao createFuncionarioDao(Connection conn) {
     	return new FuncionarioDaoJDBC(conn);
+    }
+    
+    public static LeitorDao createLeitorDao(Connection conn) {
+    	return new LeitorDaoJDBC(conn);
+    }
+    
+    public static UsuarioAcessoDao createUsuarioAcessoDao(Connection conn) {
+    	return new UsuarioAcessoDaoJDBC(conn);
+    }
+    
+    public static EmprestimoDao createEmprestimoDao(Connection conn) {
+    	return new EmprestimoDaoJDBC(conn);
     }
 }
