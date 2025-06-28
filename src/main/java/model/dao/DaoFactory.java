@@ -3,9 +3,12 @@ package model.dao;
 import java.sql.Connection;
 
 import model.dao.impl.BibliotecaDaoJDBC;
+import model.dao.impl.EmailDaoJDBC;
 import model.dao.impl.EnderecoBibliotecaDaoJDBC;
 import model.dao.impl.EstoqueDaoJDBC;
 import model.dao.impl.LivroDaoJDBC;
+import model.dao.impl.SetorDaoJDBC;
+import model.dao.impl.TelefoneDaoJDBC;
 
 public class DaoFactory {
 
@@ -23,5 +26,17 @@ public class DaoFactory {
     
     public static EnderecoBibliotecaDao createEnderecoBibliotecaDao(Connection conn) {
         return new EnderecoBibliotecaDaoJDBC(conn);
+    }
+    
+    public static SetorDao createSetorDao(Connection conn) {
+    	return new SetorDaoJDBC(conn);
+    }
+    
+    public static TelefoneDao createTelefoneDao(Connection conn) {
+    	return new TelefoneDaoJDBC(conn);
+    }
+    
+    public static EmailDao createEmailDao(Connection conn) {
+    	return new EmailDaoJDBC(conn);
     }
 }
