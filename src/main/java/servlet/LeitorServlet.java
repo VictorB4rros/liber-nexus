@@ -8,6 +8,7 @@ import java.sql.Connection;
 import com.google.gson.Gson;
 
 import db.DB;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,8 +24,20 @@ public class LeitorServlet extends HttpServlet {
     private final Gson gson = new Gson();
 
     @Override
+    protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setHeader("Access-Control-Allow-Origin", "*");
+        resp.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        resp.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+        resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+    }
+    
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.setContentType("application/json");
+    	resp.setHeader("Access-Control-Allow-Origin", "*");
+    	resp.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    	resp.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+    	
+    	resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
 
         try (BufferedReader reader = req.getReader();
@@ -47,7 +60,11 @@ public class LeitorServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.setContentType("application/json");
+    	resp.setHeader("Access-Control-Allow-Origin", "*");
+    	resp.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    	resp.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+    	
+    	resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
 
         try (BufferedReader reader = req.getReader();
@@ -70,7 +87,11 @@ public class LeitorServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.setContentType("application/json");
+    	resp.setHeader("Access-Control-Allow-Origin", "*");
+    	resp.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    	resp.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+    	
+    	resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
 
         String idStr = req.getParameter("id");
@@ -98,7 +119,11 @@ public class LeitorServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.setContentType("application/json");
+    	resp.setHeader("Access-Control-Allow-Origin", "*");
+    	resp.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    	resp.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+    	
+    	resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
 
         String idStr = req.getParameter("id");

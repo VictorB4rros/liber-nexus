@@ -86,14 +86,20 @@ public class EmprestimoDaoJDBC implements EmprestimoDao {
 
     @Override
     public EmprestimoDTO findById(Integer idEmprestimo) {
-        String sql = """
-            SELECT e.*, u.nome_usuario, b.nome_biblioteca, l.titulo_livro
-            FROM TB_Emprestimos e
-            JOIN TB_Usuarios u ON e.id_usuario = u.id_usuario
-            JOIN TB_Bibliotecas b ON e.id_biblioteca = b.id_biblioteca
-            JOIN TB_Livros l ON e.id_livro = l.id_livro
-            WHERE e.id_emprestimo = ?
-        """;
+    	String sql = """
+    		    SELECT 
+    		        e.*,
+    		        COALESCE(ltr.nome_leitor, func.nome_funcionario) AS nome_usuario,
+    		        b.nome_biblioteca,
+    		        l.titulo_livro
+    		    FROM TB_Emprestimos e
+    		    JOIN TB_Usuarios u ON e.id_usuario = u.id_usuario
+    		    LEFT JOIN TB_Leitores ltr ON u.id_usuario = ltr.id_usuario
+    		    LEFT JOIN TB_Funcionarios func ON u.id_usuario = func.id_usuario
+    		    JOIN TB_Bibliotecas b ON e.id_biblioteca = b.id_biblioteca
+    		    JOIN TB_Livros l ON e.id_livro = l.id_livro
+    		    WHERE e.id_emprestimo = ?
+    		""";
 
         try (PreparedStatement st = conn.prepareStatement(sql)) {
             st.setInt(1, idEmprestimo);

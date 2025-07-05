@@ -27,8 +27,20 @@ public class EmailServlet extends HttpServlet {
     private final Gson gson = new GsonBuilder().create();
 
     @Override
+    protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setHeader("Access-Control-Allow-Origin", "*");
+        resp.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        resp.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+        resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+    }
+    
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
+    	resp.setHeader("Access-Control-Allow-Origin", "*");
+    	resp.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    	resp.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+    	
     	resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
 
@@ -53,7 +65,11 @@ public class EmailServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("application/json");
+    	resp.setHeader("Access-Control-Allow-Origin", "*");
+    	resp.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    	resp.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+    	
+    	resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
 
         try (BufferedReader reader = req.getReader();
@@ -80,7 +96,11 @@ public class EmailServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String idBibStr = req.getParameter("idBiblioteca");
+    	resp.setHeader("Access-Control-Allow-Origin", "*");
+    	resp.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    	resp.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+    	
+    	String idBibStr = req.getParameter("idBiblioteca");
         String idSetorStr = req.getParameter("idSetor");
 
         resp.setContentType("application/json");
@@ -113,7 +133,11 @@ public class EmailServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String idBibStr = req.getParameter("idBiblioteca");
+    	resp.setHeader("Access-Control-Allow-Origin", "*");
+    	resp.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    	resp.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+    	
+    	String idBibStr = req.getParameter("idBiblioteca");
         String idSetorStr = req.getParameter("idSetor");
 
         resp.setContentType("application/json");
